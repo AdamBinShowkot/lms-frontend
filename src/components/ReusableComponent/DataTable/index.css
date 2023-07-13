@@ -1,0 +1,44 @@
+.reusable-data-table{
+    overflow: hidden;
+}
+.reusable-data-table .ant-table-container{
+    border: 1px solid #83b2f5;
+    border-radius: 6px;
+    overflow: hidden;
+}
+.reusable-data-table .ant-table-thead .ant-table-cell{
+    padding: 8px  !important;
+    background-color: #bae0ff;
+    color: #7d7f97;
+}
+.reusable-data-table .ant-table-thead .ant-table-cell{
+    border: 1px solid #83b2f5;
+    border-right: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+}
+.reusable-data-table .ant-table-thead .ant-table-cell:first-child{
+    border-left: none !important;
+}
+.reusable-data-table .ant-table-tbody .ant-table-cell{
+    border: 1px solid #83b2f5;
+    border-right: none !important;
+    border-bottom: none !important;
+}
+.reusable-data-table .ant-table-tbody .ant-table-row .ant-table-cell:first-child{
+    border-left: none !important;
+}
+
+.reusable-data-table .ant-table-tbody .ant-table-cell{
+    padding: 10px;
+}
+.reusable-data-table .ant-table-tbody .table-row-light .ant-table-cell{
+    background-color: #e6f4ff;
+}
+
+.ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:first-child{
+    border-start-start-radius:6px  !important;
+}
+.ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:last-child{
+    border-start-end-radius:6px !important;
+}

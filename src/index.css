@@ -1,0 +1,13 @@
+.collapsed-sidebar{
+  top: 50px;
+}
+.expand-sidebar{
+  /* max-width: calc(100% - 200px);
+  min-width: calc(100% - 200px); */
+  max-width: 200px !important;
+  min-width: 200px !important;
+  position: fixed !important;
+  height: 100vh;
+  z-index: 10;
+  top: 0;
+}

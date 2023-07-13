@@ -1,0 +1,65 @@
+.top-header-container{
+    box-shadow: 0px 5px 5px -6px rgba(73, 64, 64, 0.75);
+}
+.ant-layout-header{
+    height: 50px !important;
+    line-height: 50px !important;
+    overflow: hidden;
+}
+.ant-layout-header .ant-row{
+    height: 50px !important;
+    line-height: 50px !important;
+}
+.ant-layout-header .ant-row .ant-col-12{
+    height: 50px !important;
+    line-height: 50px !important;
+}
+.ant-layout-header .ant-row .ant-col-12 .ant-btn{
+    height: 50px !important;
+    width: 60px !important;
+}
+#collapsed-header{
+    position:fixed;
+    width:100%;
+    left:0;
+    top:0;
+    right: 0;
+    z-index: 10;
+}
+#expand-header{
+    width: calc(100% - 200px);
+    top:0;
+    right: 0;
+    z-index: 10;
+    position:fixed;
+    /* min-width: calc(100% - 200px); */
+}
+
+
+
+/* For Settings Drawer Style */
+.settings-drawer .ant-drawer-header{
+    padding: 6px;
+}
+
+/* Settings Title */
+.settings-drawer .setting-title{
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/* Antd Drawer Body Main */
+.settings-drawer .ant-drawer-body{
+    padding: 15px;
+}
+
+/* Inner Title CSS */
+.settings-drawer .ant-drawer-body .inner-title{
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/*  For Antd Form Item Css Override */
+.settings-drawer .ant-drawer-body .ant-form-item{
+    margin-bottom: 10px;
+}
