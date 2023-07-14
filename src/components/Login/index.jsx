@@ -28,38 +28,19 @@ const Login=()=>{
 
 
     const handleLogin=(state)=>{
-        // if(state.userId==="Reporter" && state.password==="1234"){
-        //     localStorage.setItem("token",state.userId);
-        //     localStorage.setItem("role","reporter");
-        //     Success("Login Success.",{},{})
-        //     history('/');
-        // }else if(state.userId==="Approver" && state.password==="1234"){
-        //     localStorage.setItem("token",state.userId);
-        //     localStorage.setItem("role","approver");
-        //     Success("Login Success.",{},{})
-        //     history('/');
-        // }else if(state.userId==="Printer" && state.password==="1234"){
-        //     localStorage.setItem("token",state.userId);
-        //     localStorage.setItem("role","printer");
-        //     Success("Login Success.",{},{})
-        //     history('/');
-        // }else{
-        //     Warning("User Id or Password are wrong",{},{});
-        // }
         let data={
-            userid:state.userId,
+            userName:state.userName,
             password:state.password
         }
 
         axios.post('/login',JSON.stringify(data))
         .then((response)=>{
-            if(response.status===200 && response.data.isSuccess){
+            if(response.status===200 && response.data.IsSuccess){
                 //console.log(response);
                 localStorage.setItem("token", JSON.stringify(response.data.token));
-                localStorage.setItem("UserId",response.data.UserId);
-                localStorage.setItem("EmpId",response.data.EmpId);
-                getMenuLists();
-                //localStorage.setItem("role","printer");
+                localStorage.setItem("UserId",response.data.id);
+                localStorage.setItem("GroupId",response.data.groupId);
+                //console.log(response.data)
                 Success("Login Success.",{},{})
                 history('/');
             }
@@ -99,15 +80,15 @@ const Login=()=>{
                                     colon={false}
                                     tooltip={{
                                         placement:"bottom",
-                                        title:"User Id"
+                                        title:"User Name"
                                     }}
-                                    label="User Id"
+                                    label="User Name"
                                     labelAlign='left'
-                                    name="userId"
+                                    name="userName"
                                     rules={[
                                         {
                                             required:'true',
-                                            message:"User id is required."
+                                            message:"User Name Is Required."
                                         }
                                     ]}
                                     >

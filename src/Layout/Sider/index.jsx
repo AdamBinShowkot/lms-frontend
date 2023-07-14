@@ -42,13 +42,13 @@ const SiderMain=({collapsed})=>{
     const [menuLists,setMenulists]=useState([]);
 
     useEffect(()=>{
-        let MenuLists=sessionStorage.getItem("MenuLists");
-        MenuLists=JSON.parse(MenuLists)
-        //console.log(MenuLists.length)
-        if(MenuLists.length){
-            let menus=getMenuNodeReduce(MenuLists);
-            setMenulists(menus)
-        }
+        // let MenuLists=sessionStorage.getItem("MenuLists");
+        // MenuLists=JSON.parse(MenuLists)
+        // //console.log(MenuLists.length)
+        // if(MenuLists.length){
+        //     let menus=getMenuNodeReduce(MenuLists);
+        //     setMenulists(menus)
+        // }
     },[])
 
     // Menu lists reduce
