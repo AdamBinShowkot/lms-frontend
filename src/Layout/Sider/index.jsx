@@ -19,6 +19,7 @@ import {
     Menu, 
     theme 
 } from 'antd';
+import { useSelector } from 'react-redux';
 import { 
     Link,
     useLocation
@@ -37,6 +38,9 @@ let test='FileAddOutlined';
 const SiderMain=({collapsed})=>{
     const location=useLocation();
     let {pathname}=location;
+
+    const MenuLists=useSelector((state)=>state.menu.menus);
+
     const roles=localStorage.getItem('role')
     const filterMenu=menuConfig.filter((mnu)=>mnu.roles.includes(roles))
     const [menuLists,setMenulists]=useState([]);
@@ -45,24 +49,24 @@ const SiderMain=({collapsed})=>{
         // let MenuLists=sessionStorage.getItem("MenuLists");
         // MenuLists=JSON.parse(MenuLists)
         // //console.log(MenuLists.length)
-        // if(MenuLists.length){
-        //     let menus=getMenuNodeReduce(MenuLists);
-        //     setMenulists(menus)
-        // }
-    },[])
+        if(MenuLists.length){
+            let menus=getMenuNodeReduce(MenuLists);
+            setMenulists(menus)
+        }
+    },[MenuLists])
 
     // Menu lists reduce
     const getMenuNodeReduce=(menuListss)=>{
         return menuListss.reduce((pre,item)=>{
-            if(!item.children){
+            if(!item.ModuleId){
                 pre=[...pre,(
                     <Menu.Item 
-                    key={item.MenuPath}
-                    icon={<FontAwesomeIcon icon={faCoffee}/>}
+                    key={item.path}
+                    icon={<div><i className={`${item.IconName}`}></i></div>}
                     >
-                        <Link to={item.MenuPath}>
+                        <Link to={item.path}>
                             <strong>
-                                {item.MenuName}
+                                {item.name}
                             </strong>
                         </Link>
                     </Menu.Item>
@@ -72,12 +76,8 @@ const SiderMain=({collapsed})=>{
                 pre=[...pre,(
                     <SubMenu
                     key={item.MenuName}
-                    title={
-                    <span>
-                        {<FileAddOutlined/>}
-                        <span>{item.MenuName}</span>
-                    </span>
-                    }
+                    icon={<div><i className={`${item.IconName}`}></i></div>}
+                    title={item.ModuleName}
                     >
                         {getMenuNodeReduce(item.children)}
                     </SubMenu>
