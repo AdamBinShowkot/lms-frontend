@@ -2,21 +2,19 @@ import React from 'react';
 import { Button, Layout, Menu, theme } from 'antd';
 import { CSSTransition, SwitchTransition } from 'react-transition-group'
 import { useState } from 'react';
-import AddNewNewsPage from '../../pages/AddNewNews';
-import ListsMain from '../../components/NewsLists';
-import DetailsMain from '../../components/ListDetails';
-import ContentMain2 from '../../components/SetupNews';
-import ReportMain from '../../components/ReportLists';
-import PrintMain from '../../components/ReportDetails';
 import { Routes,Route } from 'react-router-dom';
-import routeMap from '../../config/routeMap';
+import storeRouteMap from '../../pages/Store/routeMap';
+import StoreIndex from '../../pages/Store';
+import bookRouteMap from '../../pages/Book/routeMap';
+import BookIndex from '../../pages/Book';
+import settingsRouteMap from '../../pages/Settings/routeMap';
+import SettingsIndex from '../../pages/Settings';
 import './index.css'
 
 const { Content } = Layout;
 
 const ContentMain=({colorBgContainer,collapsed})=>{
     const roles=localStorage.getItem("role");
-    const filterRoute=routeMap.filter((route)=>route.roles.includes(roles))
     return(
         <>
             {/* <SwitchTransition>
@@ -29,7 +27,7 @@ const ContentMain=({colorBgContainer,collapsed})=>{
                 > */}
                     <Content
                     className={`${collapsed?'collapsed-content':'expand-content'}`}
-                    style={{
+                    style={{ 
                     margin: '10px',
                     marginTop:'64px',
                     padding: 10,
@@ -38,21 +36,35 @@ const ContentMain=({colorBgContainer,collapsed})=>{
                     }}
                     >
                         <Routes>
-                            {/* <Route path='addNewPost' element={<AddNewNewsPage/>}/>
-                            <Route path='lists' element={<ListsMain/>}/>
-                            <Route path='lists/:id' element={<DetailsMain/>}/>
-                            <Route path='content' element={<ContentMain2/>}/>
-                            <Route path='report' element={<ReportMain/>}/>
-                            <Route path='report/:id' element={<PrintMain/>}/> */}
-                            {
-                                filterRoute.length?filterRoute.map((rte,index)=>{
-                                    return <Route
-                                    element={rte.component}
-                                    key={rte.path}
-                                    path={rte.path}
+                            <Route path='/store' element={<StoreIndex/>}>
+                                {storeRouteMap.map((data,i)=>{
+                                    return <Route 
+                                    key={data.path} 
+                                    path={data.path} 
+                                    element={data.component}
                                     />
-                                }):""
-                            }
+                                })}
+                            </Route>
+
+                            <Route path='/book' element={<BookIndex/>}>
+                                {bookRouteMap.map((data,i)=>{
+                                    return <Route 
+                                    key={data.path} 
+                                    path={data.path} 
+                                    element={data.component}
+                                    />
+                                })}
+                            </Route>
+
+                            <Route path='/settings' element={<SettingsIndex/>}>
+                                {settingsRouteMap.map((data,i)=>{
+                                    return <Route 
+                                    key={data.path} 
+                                    path={data.path} 
+                                    element={data.component}
+                                    />
+                                })}
+                            </Route>
                         </Routes>
                     </Content>
                 {/* </CSSTransition>

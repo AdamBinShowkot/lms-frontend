@@ -75,7 +75,7 @@ const SiderMain=({collapsed})=>{
             }else{
                 pre=[...pre,(
                     <SubMenu
-                    key={item.MenuName}
+                    key={item.ModuleId}
                     icon={<div><i className={`${item.IconName}`}></i></div>}
                     title={item.ModuleName}
                     >

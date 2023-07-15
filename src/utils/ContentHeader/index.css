@@ -1,0 +1,40 @@
+.inside-header{
+    top:50px !important;
+    left:200px !important;
+    z-index: 10 !important;
+    position: fixed;
+    width: 100%;
+}
+.inside-header .ant-card {
+    border-radius: 0px;
+    height: 55px;
+    /* line-height: 55px; */
+}
+.inside-header .ant-card .ant-card-body{
+    padding: 10px;
+    border-radius: 0px;
+}
+
+.inside-header .add-new-btn{
+    background-color: #389e0d;
+    color: #fff;
+    border-color: #389e0d;
+    margin-right: 8px;
+}
+.inside-header .add-new-btn:hover{
+    background-color: #fff;
+    color: #000;
+    border-color: #389e0d;
+}
+
+.inside-header .list-all-btn{
+    background-color: #0958d9;
+    color: #fff;
+    border-color: #0958d9;
+}
+
+.inside-header .list-all-btn:hover{
+    background-color: #fff;
+    color: #000;
+    border-color: #0958d9;
+}
