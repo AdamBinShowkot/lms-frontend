@@ -1,14 +1,19 @@
 import loadable from "@loadable/component";
 
-const AddDonnerPage=loadable(()=>import('./Donner'));
+const AddDonnerPage=loadable(()=>import('./Donner/Form'));
+const DonnerLists=loadable(()=>import('./Donner/DataLists'));
 const SetupStuck=loadable(()=>import('./Stuck'));
 const AddNewBook=loadable(()=>import('./AddNewBook/Form'));
-const AddNewBookLists=loadable(()=>import('./AddNewBook/DataLists'));
+const BookLists=loadable(()=>import('./AddNewBook/DataLists'));
 
 export default[
     {
         path:'addDonner',
         component:<AddDonnerPage/>
+    },
+    {
+        path:'addDonner/lists',
+        component:<DonnerLists/>
     },
     {
         path:"setupStack",
@@ -20,6 +25,6 @@ export default[
     },
     {
         path:"addNewBook/lists",
-        component:<AddNewBookLists/>
+        component:<BookLists/>
     }
 ]
