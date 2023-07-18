@@ -585,6 +585,28 @@ const AddNewForm=()=>{
                                     </Form.Item>
                                 </Col> */}
                             </Row>
+                            <Row >
+                                <Col 
+                                span={24}
+                                style={{
+                                    textAlign:'right'
+                                }}
+                                >
+                                    <Button
+                                    style={{
+                                        marginRight:"10px"
+                                    }}
+                                    >
+                                        Reset
+                                    </Button>
+                                    <Button
+                                    htmlType='submit'
+                                    type='primary'
+                                    >
+                                        Save
+                                    </Button>
+                                </Col>
+                            </Row>
                         </Form>
                     </Card>
                 </Col>
