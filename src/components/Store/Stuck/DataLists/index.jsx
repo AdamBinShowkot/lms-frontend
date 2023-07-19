@@ -9,7 +9,7 @@ import {
 } from 'antd';
 import DataTable from '../../../ReusableComponent/DataTable';
 import { useDispatch,useSelector } from 'react-redux';
-import { getStuckLists } from '../../../../Redux/features/store/Async';
+import { getStuckLists,createNewStuck } from '../../../../Redux/features/store/Async';
 
 
 const DataLists=()=>{
@@ -18,6 +18,7 @@ const DataLists=()=>{
 
     useEffect(()=>{
         dispatch(getStuckLists());
+        //dispatch(createNewStuck())
     },[])
     const columns = [
         {
