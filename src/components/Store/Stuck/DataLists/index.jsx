@@ -6,14 +6,24 @@ import { Button, Col, Row } from 'antd';
 const DataLists=()=>{
     const columns = [
         {
-            title: 'Column One',
+            title: 'Serial',
+            dataIndex: 'sl',
+            key: 'sl',
+        },
+        {
+            title: 'Cupboard Name',
             dataIndex: 'name',
             key: 'name',
         },
         {
-            title: 'Column Two',
-            dataIndex: 'age',
-            key: 'age',
+            title: 'Row No',
+            dataIndex: 'rowNO',
+            key: 'rowNo',
+        },
+        {
+            title: 'Column No',
+            dataIndex: 'colNo',
+            key: 'colNo',
         },
         {
             title:"Action",
@@ -34,7 +44,8 @@ const DataLists=()=>{
             <DataTable
             tableProps={{
                 columns,
-                data
+                data:[],
+                noDataText:'Stuck Data Is Not Available.'
             }}
             />
         </>
