@@ -22,6 +22,7 @@ import {
 
 const AddNewForm=()=>{
     const dispatch=useDispatch();
+    const [isFemale,SetIsFemale]=useState(false);
 
     // get state from redux state
     const bloodGroup=useSelector((state)=>state.common.bloodGroup);
@@ -75,12 +76,20 @@ const AddNewForm=()=>{
         }
         return data;
     }
+
+    const handleOnFormChange=(changeValue,allValues)=>{
+       if(changeValue.gender){
+        console.log("KKK")
+       }
+    }
     return(
         <>
             <Row>
                 <Col span={24}>
                     <Card>
-                        <Form>
+                        <Form
+                        onValuesChange={handleOnFormChange}
+                        >
                             <Row>
                                 <Col span={12}>
                                     <Form.Item
