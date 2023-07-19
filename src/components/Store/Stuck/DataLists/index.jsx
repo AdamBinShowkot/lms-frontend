@@ -1,9 +1,24 @@
-import React from 'react';
+import React,{
+    useEffect,
+    useState
+} from 'react';
+import { 
+    Button, 
+    Col, 
+    Row 
+} from 'antd';
 import DataTable from '../../../ReusableComponent/DataTable';
-import { Button, Col, Row } from 'antd';
+import { useDispatch,useSelector } from 'react-redux';
+import { getStuckLists } from '../../../../Redux/features/store/Async';
 
 
 const DataLists=()=>{
+    const dispatch=useDispatch();
+    const stucks=useSelector((state)=>state.store.stucks);
+
+    useEffect(()=>{
+        dispatch(getStuckLists());
+    },[])
     const columns = [
         {
             title: 'Serial',
@@ -11,13 +26,13 @@ const DataLists=()=>{
             key: 'sl',
         },
         {
-            title: 'Cupboard Name',
+            title: 'Name',
             dataIndex: 'name',
             key: 'name',
         },
         {
             title: 'Row No',
-            dataIndex: 'rowNO',
+            dataIndex: 'rowNo',
             key: 'rowNo',
         },
         {
@@ -44,7 +59,7 @@ const DataLists=()=>{
             <DataTable
             tableProps={{
                 columns,
-                data:[],
+                data:stucks,
                 noDataText:'Stuck Data Is Not Available.'
             }}
             />
