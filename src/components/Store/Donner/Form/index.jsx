@@ -9,12 +9,15 @@ import {
     Form,
     Input,
     Select,
-    Button
+    Button,
+    Upload,
+    Progress
 } from 'antd';
 import { 
     useDispatch,
     useSelector
 } from 'react-redux';
+import axios from 'axios';
 import { 
     getAllBloodGroup,
     getAllGender,
@@ -24,6 +27,8 @@ import {
 const AddNewForm=()=>{
     const dispatch=useDispatch();
     const [isFemale,SetIsFemale]=useState(false);
+    const [defaultFileList, setDefaultFileList] = useState([]);
+    const [progress, setProgress] = useState(0);
 
     // get state from redux state
     const bloodGroup=useSelector((state)=>state.common.bloodGroup);
@@ -97,6 +102,47 @@ const AddNewForm=()=>{
         console.log("KKK")
        }
     }
+
+    const uploadImage = async options => {
+        const { onSuccess, onError, file, onProgress } = options;
+
+        const fmData = new FormData();
+        const config = {
+        headers: { "content-type": "multipart/form-data" },
+        onUploadProgress: event => {
+            const percent = Math.floor((event.loaded / event.total) * 100);
+            setProgress(percent);
+            if (percent === 100) {
+            setTimeout(() => setProgress(0), 1000);
+            }
+            onProgress({ percent: (event.loaded / event.total) * 100 });
+        }
+        };
+        fmData.append("image", file);
+
+        onSuccess("done");
+        // try {
+        // const res = await axios.post(
+        //     "https://jsonplaceholder.typicode.com/posts",
+        //     fmData,
+        //     config
+        // );
+
+        // onSuccess("done");
+        // console.log("server res: ", res);
+        // } catch (err) {
+        // console.log("Eroor: ", err);
+        // const error = new Error("Some error");
+        // onError({ err });
+        // }
+    };
+
+    const handleOnChange = ({ file, fileList, event }) => {
+        // console.log(file, fileList, event);
+        //Using Hooks to update the state to the current filelist
+        setDefaultFileList(fileList);
+        //filelist - [{uid: "-1",url:'Some url to image'}]
+  };
     return(
         <>
             <Row>
@@ -579,21 +625,21 @@ const AddNewForm=()=>{
                                     </Form.Item>
                                 </Col>
 
-                                {/* <Col span={12}>
+                                <Col span={12}>
                                     <Form.Item
                                     colon={false}
                                     tooltip={{
                                         placement:"bottom",
-                                        title:"Blood Group"
+                                        title:"Passport Size Image"
                                     }}
                                     rules={[
                                         {
                                             required:true,
-                                            message:"Blood Group Is Required."
+                                            message:"Passport Size Image Is Required."
                                         }
                                     ]}
-                                    name="bloodGroup"
-                                    label="Blood Group"
+                                    name="passportSizeImage"
+                                    label="Passport Size Image"
                                     wrapperCol={{
                                       span:16  
                                     }}
@@ -601,14 +647,58 @@ const AddNewForm=()=>{
                                         span:8
                                     }}
                                     >
-                                        <Select
-                                        options={bloodGroupData}
-                                        labelInValue={true}
-                                        optionFilterProp='label'
-                                        showSearch
-                                        />
+                                        <Upload
+                                        accept="image/*"
+                                        customRequest={uploadImage}
+                                        onChange={handleOnChange}
+                                        listType="picture-card"
+                                        defaultFileList={defaultFileList}
+                                        className="image-upload-grid"
+                                        >
+                                            {defaultFileList.length >= 1 ? null : <div>Upload Image</div>}
+                                        </Upload>
+                                        {progress > 0 ? <Progress percent={progress} /> : null}
                                     </Form.Item>
-                                </Col> */}
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col span={12}>
+                                <Form.Item
+                                    colon={false}
+                                    tooltip={{
+                                        placement:"bottom",
+                                        title:"Passport Size Image"
+                                    }}
+                                    rules={[
+                                        {
+                                            required:true,
+                                            message:"Passport Size Image Is Required."
+                                        }
+                                    ]}
+                                    name="passportSizeImage"
+                                    label="NID/Birth Certificate"
+                                    wrapperCol={{
+                                      span:16  
+                                    }}
+                                    labelCol={{
+                                        span:8
+                                    }}
+                                    >
+                                        <Upload
+                                        accept="image/*"
+                                        customRequest={uploadImage}
+                                        onChange={handleOnChange}
+                                        listType="picture-card"
+                                        defaultFileList={defaultFileList}
+                                        className="image-upload-grid"
+                                        >
+                                            {defaultFileList.length >= 1 ? null : <div>Upload Image</div>}
+                                        </Upload>
+                                        {progress > 0 ? <Progress percent={progress} /> : null}
+                                    </Form.Item>
+                                </Col>
+                                <Col span={12}>
+                                </Col>
                             </Row>
                             <Row >
                                 <Col 
