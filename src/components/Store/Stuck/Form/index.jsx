@@ -1,6 +1,7 @@
 import React,{
     useState,
-    useEffect
+    useEffect,
+    useRef
 } from 'react';
 import {
     Row,
@@ -12,14 +13,33 @@ import {
     Button,
     InputNumber
 } from 'antd';
+import { useDispatch } from 'react-redux';
+import { createNewStuck } from '../../../../Redux/features/store/Async';
 
 const AddNewForm=()=>{
+    const formref=useRef(null);
+    const dispatch=useDispatch();
+
+    const handleOnSubmit=(values)=>{
+        const data={
+            name:values.stackName,
+            description:values.stackDetails,
+            rowNo:parseInt(values.rowNo),
+            colNo:parseInt(values.colNo)
+        };
+
+        dispatch(createNewStuck(data));
+        formref.current.resetFields();
+    }
     return(
         <>
             <Row>
                 <Col span={24}>
                     <Card>
-                        <Form>
+                        <Form
+                        onFinish={handleOnSubmit}
+                        ref={formref}
+                        >
                             <Row>
                                 <Col span={12}>
                                     <Form.Item
@@ -80,16 +100,16 @@ const AddNewForm=()=>{
                                     colon={false}
                                     tooltip={{
                                         placement:"bottom",
-                                        title:"Total Row"
+                                        title:"Row Number"
                                     }}
                                     rules={[
                                         {
                                             required:true,
-                                            message:"Total Row Is Required."
+                                            message:"Row Number Is Required."
                                         }
                                     ]}
-                                    name="totalRow"
-                                    label="Total Row"
+                                    name="rowNo"
+                                    label="Row Number"
                                     wrapperCol={{
                                       span:16  
                                     }}
@@ -106,16 +126,16 @@ const AddNewForm=()=>{
                                     colon={false}
                                     tooltip={{
                                         placement:"bottom",
-                                        title:"Total Column"
+                                        title:"Column Number"
                                     }}
                                     rules={[
                                         {
                                             required:true,
-                                            message:"Total Column Is Required."
+                                            message:"Column Number Is Required."
                                         }
                                     ]}
-                                    name="totalColumn"
-                                    label="Total Column"
+                                    name="colNo"
+                                    label="Column Number"
                                     wrapperCol={{
                                       span:16  
                                     }}

@@ -1,19 +1,45 @@
-import React from 'react';
+import React,{
+    useEffect,
+    useState
+} from 'react';
+import { 
+    Button, 
+    Col, 
+    Row 
+} from 'antd';
 import DataTable from '../../../ReusableComponent/DataTable';
-import { Button, Col, Row } from 'antd';
+import { useDispatch,useSelector } from 'react-redux';
+import { getStuckLists,createNewStuck } from '../../../../Redux/features/store/Async';
 
 
 const DataLists=()=>{
+    const dispatch=useDispatch();
+    const stucks=useSelector((state)=>state.store.stucks);
+
+    useEffect(()=>{
+        dispatch(getStuckLists());
+        //dispatch(createNewStuck())
+    },[])
     const columns = [
         {
-            title: 'Column One',
+            title: 'Serial',
+            dataIndex: 'sl',
+            key: 'sl',
+        },
+        {
+            title: 'Name',
             dataIndex: 'name',
             key: 'name',
         },
         {
-            title: 'Column Two',
-            dataIndex: 'age',
-            key: 'age',
+            title: 'Row No',
+            dataIndex: 'rowNo',
+            key: 'rowNo',
+        },
+        {
+            title: 'Column No',
+            dataIndex: 'colNo',
+            key: 'colNo',
         },
         {
             title:"Action",
@@ -34,7 +60,8 @@ const DataLists=()=>{
             <DataTable
             tableProps={{
                 columns,
-                data
+                data:stucks,
+                noDataText:'Stuck Data Is Not Available.'
             }}
             />
         </>
