@@ -35,3 +35,19 @@ export const getAllBloodGroup=createAsyncThunk(
         return genderLists;
     }
 )
+
+export const getAllOccupationLists=createAsyncThunk(
+    'getAllOccupation',
+    async()=>{
+        configAxios();
+        const occupationLists=axios.get(`/common/getOccupation`).then((response)=>{
+            if(response.status===200 && response.data.IsSuccess){
+                return response.data.data;
+            }
+        }).catch((error)=>{
+            console.log("Get Occupation Lists Error.");
+            return [];
+        })
+        return occupationLists;
+    }
+)

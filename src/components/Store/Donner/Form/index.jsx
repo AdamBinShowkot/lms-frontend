@@ -17,7 +17,8 @@ import {
 } from 'react-redux';
 import { 
     getAllBloodGroup,
-    getAllGender 
+    getAllGender,
+    getAllOccupationLists
 } from '../../../../Redux/features/common/Async';
 
 const AddNewForm=()=>{
@@ -27,14 +28,17 @@ const AddNewForm=()=>{
     // get state from redux state
     const bloodGroup=useSelector((state)=>state.common.bloodGroup);
     const gender=useSelector((state)=>state.common.gender);
+    const occupations=useSelector((state)=>state.common.occupations);
 
     // state assign
     const [gernderData,setGenderData]=useState([]);
     const [bloodGroupData,setBloodGroupData]=useState([]);
+    const [occupationData,setOccupationData]=useState([]);
 
     useEffect(()=>{
         dispatch(getAllBloodGroup());
         dispatch(getAllGender());
+        dispatch(getAllOccupationLists());
     },[]);
 
     // For Update Gender
@@ -56,6 +60,17 @@ const AddNewForm=()=>{
             setBloodGroupData(lists);
         }
     },[bloodGroup])
+
+
+    // For Update Occupation Lists
+    useEffect(()=>{
+        let lists=[];
+        if(occupations.length){
+            lists=configListForSelectData(occupations);
+
+            setOccupationData(lists);
+        }
+    },[occupations])
 
     // Common Function For Config Lists
     const configListForSelectData=(lists)=>{
@@ -438,6 +453,7 @@ const AddNewForm=()=>{
                                     }}
                                     >
                                         <Select
+                                        options={occupationData}
                                         labelInValue={true}
                                         optionFilterProp='label'
                                         showSearch
@@ -492,7 +508,7 @@ const AddNewForm=()=>{
                                         }
                                     ]}
                                     name="qualification"
-                                    label="qualification"
+                                    label="Qualification"
                                     wrapperCol={{
                                       span:16  
                                     }}

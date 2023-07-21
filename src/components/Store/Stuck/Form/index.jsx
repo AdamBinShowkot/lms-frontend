@@ -9,7 +9,8 @@ import {
     Form,
     Input,
     Select,
-    Button
+    Button,
+    InputNumber
 } from 'antd';
 
 const AddNewForm=()=>{
@@ -96,7 +97,7 @@ const AddNewForm=()=>{
                                         span:8
                                     }}
                                     >
-                                        <Input/>
+                                        <InputNumber/>
                                     </Form.Item>
                                 </Col>
 
@@ -122,7 +123,7 @@ const AddNewForm=()=>{
                                         span:8
                                     }}
                                     >
-                                        <Input/>
+                                        <InputNumber/>
                                     </Form.Item>
                                 </Col>
                             </Row>

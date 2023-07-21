@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { 
     getAllBloodGroup,
-    getAllGender 
+    getAllGender, 
+    getAllOccupationLists
 } from "./Async";
 
 const initialState={
@@ -23,6 +24,9 @@ const CommonSlice=createSlice({
         builder.addCase(getAllGender.fulfilled,(state,action)=>{
             state.gender=action.payload
         });
+        builder.addCase(getAllOccupationLists.fulfilled,(state,action)=>{
+            state.occupations=action.payload;
+        })
     }
 })
 
