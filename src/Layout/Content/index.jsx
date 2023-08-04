@@ -3,6 +3,7 @@ import { Button, Layout, Menu, theme } from 'antd';
 import { CSSTransition, SwitchTransition } from 'react-transition-group'
 import { useState } from 'react';
 import { Routes,Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import storeRouteMap from '../../pages/Store/routeMap';
 import StoreIndex from '../../pages/Store';
 import bookRouteMap from '../../pages/Book/routeMap';
@@ -13,7 +14,8 @@ import './index.css'
 
 const { Content } = Layout;
 
-const ContentMain=({colorBgContainer,collapsed})=>{
+const ContentMain=({colorBgContainer})=>{
+    const {isCollapsed}=useSelector((state)=>state.ui)
     const roles=localStorage.getItem("role");
     return(
         <>
@@ -26,7 +28,7 @@ const ContentMain=({colorBgContainer,collapsed})=>{
                 unmountOnExit
                 > */}
                     <Content
-                    className={`${collapsed?'collapsed-content':'expand-content'}`}
+                    className={`${isCollapsed?'collapsed-content':'expand-content'}`}
                     style={{ 
                     margin: '10px',
                     marginTop:'64px',

@@ -2,6 +2,10 @@ import React,{
   useState,
   useEffect
 } from 'react';
+import { 
+  useSelector,
+  useDispatch 
+} from 'react-redux';
 import {
     Layout,
     Row,
@@ -19,12 +23,15 @@ import {
     SettingOutlined,
     UserSwitchOutlined
 } from '@ant-design/icons';
+import { handleMenuCollapsed } from '../../Redux/features/UI';
 import HOne from './Heading/HOne';
 import HTwo from './Heading/HTwo'
 import './index.css'
 const { Header, Sider, Content } = Layout;
 
-const HeaderMain=({collapsed,setCollapsed,colorBgContainer})=>{
+const HeaderMain=({colorBgContainer})=>{
+  const dispatch=useDispatch();
+  const {isCollapsed}=useSelector((state)=>state.ui)
   const [open, setOpen] = useState(false);
 
   const [value, setValue] = useState(1);
@@ -79,7 +86,7 @@ const HeaderMain=({collapsed,setCollapsed,colorBgContainer})=>{
     <>
       <Header
       className='top-header-container'
-      id={`${collapsed?"collapsed-header":"expand-header"}`}
+      id={`${isCollapsed?"collapsed-header":"expand-header"}`}
       style={{
           padding: 0,
           background: '#f2f3f8',
@@ -89,8 +96,8 @@ const HeaderMain=({collapsed,setCollapsed,colorBgContainer})=>{
           <Col span={12}>
             <Button
             type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
+            icon={isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            onClick={() => dispatch(handleMenuCollapsed())}
             style={{
               fontSize: '16px',
               width: 64,

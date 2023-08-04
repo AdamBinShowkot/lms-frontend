@@ -1,9 +1,14 @@
 .inside-header{
     top:50px !important;
-    left:200px !important;
     z-index: 10 !important;
     position: fixed;
     width: 100%;
+}
+.collapsed-header{
+    left: 80px !important;
+}
+.expand-header{
+    left:200px !important;
 }
 .inside-header .ant-card {
     border-radius: 0px;

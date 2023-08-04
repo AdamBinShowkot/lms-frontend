@@ -5,7 +5,7 @@ import storeSlice from '../features/store'
 
 const reducers={
     menu:MenuSlice,
-    tags:uiSlice,
+    ui:uiSlice,
     common:CommonSlice,
     store:storeSlice
 }

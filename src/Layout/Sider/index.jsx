@@ -33,13 +33,13 @@ const {
 } = Layout;
 const SubMenu = Menu.SubMenu;
 
-let test='FileAddOutlined';
 
-const SiderMain=({collapsed})=>{
+const SiderMain=()=>{
     const location=useLocation();
     let {pathname}=location;
 
     const MenuLists=useSelector((state)=>state.menu.menus);
+    const {isCollapsed}=useSelector((state)=>state.ui)
 
     const roles=localStorage.getItem('role')
     const filterMenu=menuConfig.filter((mnu)=>mnu.roles.includes(roles))
@@ -91,8 +91,8 @@ const SiderMain=({collapsed})=>{
             <Sider 
             trigger={null} 
             collapsible 
-            collapsed={collapsed}
-            className={`${collapsed?'collapsed-sidebar':'expand-sidebar'}`}
+            collapsed={isCollapsed}
+            className={`${isCollapsed?'collapsed-sidebar':'expand-sidebar'}`}
             style={{
                 backgroundColor:'#fff',
                 paddingTop:'10px'

@@ -28,7 +28,6 @@ import getMenuLists from '../utils/getMenus';
 
   const MainLayout = ({}) => {
     const dispatch=useDispatch();
-    const [collapsed, setCollapsed] = useState(false);
     const history=useNavigate();
     const {
       token: { colorBgContainer },
@@ -55,16 +54,13 @@ import getMenuLists from '../utils/getMenus';
         <Layout 
         style={{ minHeight: "100vh",overflow:"hidden" }}
         >
-          <SiderMain collapsed={collapsed} />
+          <SiderMain/>
           <Layout>
             <HeaderMain 
-            collapsed={collapsed} 
-            setCollapsed={setCollapsed}
             colorBgContainer={colorBgContainer}
             />
 
             <ContentMain 
-            collapsed={collapsed}
             colorBgContainer={colorBgContainer}
             />
           </Layout>
