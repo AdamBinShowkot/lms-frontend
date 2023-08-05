@@ -11,7 +11,9 @@ import {
     Select,
     Button,
     Upload,
-    Progress
+    Progress,
+    DatePicker,
+    Checkbox 
 } from 'antd';
 import { 
     useDispatch,
@@ -29,6 +31,7 @@ const AddNewForm=()=>{
     const [isFemale,SetIsFemale]=useState(false);
     const [defaultFileList, setDefaultFileList] = useState([]);
     const [progress, setProgress] = useState(0);
+    const [nidChecked,setNidChecked]=useState(true)
 
     // get state from redux state
     const bloodGroup=useSelector((state)=>state.common.bloodGroup);
@@ -99,7 +102,7 @@ const AddNewForm=()=>{
 
     const handleOnFormChange=(changeValue,allValues)=>{
        if(changeValue.gender){
-        console.log("KKK")
+
        }
     }
 
@@ -142,7 +145,24 @@ const AddNewForm=()=>{
         //Using Hooks to update the state to the current filelist
         setDefaultFileList(fileList);
         //filelist - [{uid: "-1",url:'Some url to image'}]
-  };
+    };
+
+    const handleFormFinish=(values)=>{
+        const myValues = {
+            ...values,
+            dateOfBirth: values['dateOfBirth'].format('YYYY-MM-DD'),
+            date:values['date'].format('YYYY-MM-DD'),
+            gender:values.gender.value?values.gender.value:0,
+            occupation:values.occupation.value?values.occupation.value:0,
+            bloodGroup:values.bloodGroup.value?values.bloodGroup.value:0,
+            isNid:nidChecked?1:0,
+            imageId:1,
+            nidId:1,
+            isFemale:values.gender.value===1?values.gender.value===1?1:0:0
+        }
+
+        console.log(myValues)
+    }
     return(
         <>
             <Row>
@@ -150,6 +170,7 @@ const AddNewForm=()=>{
                     <Card>
                         <Form
                         onValuesChange={handleOnFormChange}
+                        onFinish={handleFormFinish}
                         >
                             <Row>
                                 <Col span={12}>
@@ -200,7 +221,12 @@ const AddNewForm=()=>{
                                         span:8
                                     }}
                                     >
-                                        <Input/>
+                                        <DatePicker
+                                        style={{
+                                            width:'60%'
+                                        }}
+                                        placeholder='Select Create Date'
+                                        />
                                     </Form.Item>
                                 </Col>
                             </Row>
@@ -254,7 +280,12 @@ const AddNewForm=()=>{
                                         span:8
                                     }}
                                     >
-                                        <Input/>
+                                        <DatePicker
+                                        style={{
+                                            width:'60%'
+                                        }}
+                                        placeholder='Select Date Of Birth'
+                                        />
                                     </Form.Item>
                                 </Col>
                             </Row>
@@ -363,60 +394,6 @@ const AddNewForm=()=>{
                                     }}
                                     >
                                         <Input.TextArea/>
-                                    </Form.Item>
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col span={12}>
-                                    <Form.Item
-                                    colon={false}
-                                    tooltip={{
-                                        placement:"bottom",
-                                        title:"Mobile No"
-                                    }}
-                                    rules={[
-                                        {
-                                            required:true,
-                                            message:"Mobile No Is Required."
-                                        }
-                                    ]}
-                                    name="mobileNo"
-                                    label="Mobile No"
-                                    wrapperCol={{
-                                      span:16  
-                                    }}
-                                    labelCol={{
-                                        span:8
-                                    }}
-                                    >
-                                        <Input/>
-                                    </Form.Item>
-                                </Col>
-
-                                <Col span={12}>
-                                    <Form.Item
-                                    colon={false}
-                                    tooltip={{
-                                        placement:"bottom",
-                                        title:"WhatsApp No"
-                                    }}
-                                    rules={[
-                                        {
-                                            required:true,
-                                            message:"WhatsApp No Is Required."
-                                        }
-                                    ]}
-                                    name="whatsAppNo"
-                                    label="WhatsApp No"
-                                    wrapperCol={{
-                                      span:16  
-                                    }}
-                                    labelCol={{
-                                        span:8
-                                    }}
-                                    >
-                                        <Input/>
                                     </Form.Item>
                                 </Col>
                             </Row>
@@ -634,7 +611,7 @@ const AddNewForm=()=>{
                                     }}
                                     rules={[
                                         {
-                                            required:true,
+                                            required:false,
                                             message:"Passport Size Image Is Required."
                                         }
                                     ]}
@@ -648,12 +625,12 @@ const AddNewForm=()=>{
                                     }}
                                     >
                                         <Upload
-                                        accept="image/*"
-                                        customRequest={uploadImage}
-                                        onChange={handleOnChange}
-                                        listType="picture-card"
-                                        defaultFileList={defaultFileList}
-                                        className="image-upload-grid"
+                                        // accept="image/*"
+                                        // customRequest={uploadImage}
+                                        // onChange={handleOnChange}
+                                        // listType="picture-card"
+                                        // defaultFileList={defaultFileList}
+                                        // className="image-upload-grid"
                                         >
                                             {defaultFileList.length >= 1 ? null : <div>Upload Image</div>}
                                         </Upload>
@@ -671,11 +648,11 @@ const AddNewForm=()=>{
                                     }}
                                     rules={[
                                         {
-                                            required:true,
+                                            required:false,
                                             message:"Passport Size Image Is Required."
                                         }
                                     ]}
-                                    name="passportSizeImage"
+                                    name="nid"
                                     label="NID/Birth Certificate"
                                     wrapperCol={{
                                       span:16  
@@ -695,6 +672,9 @@ const AddNewForm=()=>{
                                             {defaultFileList.length >= 1 ? null : <div>Upload Image</div>}
                                         </Upload>
                                         {progress > 0 ? <Progress percent={progress} /> : null}
+                                        <Checkbox checked={nidChecked}  onChange={()=>{setNidChecked(!nidChecked)}}>
+                                            Is Nid
+                                        </Checkbox>
                                     </Form.Item>
                                 </Col>
                                 <Col span={12}>
